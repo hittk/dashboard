@@ -1,0 +1,51 @@
+id: dashboard
+codename: Dashboard
+summary: This page. A public, sanitised view of what is in flight across every project and what is waiting on me.
+status: green
+stage: review
+started: 2026-07-27
+updated: 2026-07-27
+
+plan:
+  - id: m1
+    title: Schema, privacy rules and the sanitisation gate
+    status: done
+  - id: m2
+    title: Build with validation and derived metrics
+    status: done
+  - id: m3
+    title: The page itself
+    status: done
+  - id: m4
+    title: Deploy workflow, docs and the status-update skill
+    status: done
+  - id: m5
+    title: Live, with real projects on it
+    status: in_progress
+
+next_action:
+  title: Switch on Pages and secret scanning, then merge to main
+  due: 2026-07-28
+
+blocked_on_me:
+  - title: Two repository settings have to be switched on before anything deploys
+    decision: Pages source to Actions, and secret scanning with push protection
+    since: 2026-07-27
+
+risks:
+  - title: A dashboard nobody updates becomes fiction within a fortnight
+    severity: medium
+    mitigation: Stale badge after 7 days, plus a status skill that updates a project from its own session.
+  - title: The gate catches patterns and known terms, not judgement calls
+    severity: medium
+    mitigation: Anything identifying in context still needs a human read before it is pushed.
+
+links:
+  - label: Privacy rules
+    url: https://github.com/hittk/dashboard/blob/main/PRIVACY.md
+
+log:
+  - date: 2026-07-27
+    note: Built — schema, privacy gate, build script, page, workflows and docs.
+  - date: 2026-07-27
+    note: Seeded with five real projects; the fictional examples removed.

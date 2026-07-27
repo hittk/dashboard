@@ -1,0 +1,52 @@
+id: anvil
+codename: Anvil
+summary: Strength-training app for Android — on-device logging, health sync and offline charts. Being readied for a first store release.
+status: green
+stage: review
+started: 2026-06-20
+updated: 2026-07-27
+
+plan:
+  - id: m1
+    title: Core — set logging, exercise library, strength trends
+    status: done
+  - id: m2
+    title: Health sync and imported-session handling
+    status: done
+  - id: m3
+    title: Release readiness — licensing, signing config, durable migrations
+    status: in_progress
+    note: Everything landed except the signing key itself.
+  - id: m4
+    title: Privacy policy published for the listing
+    status: done
+  - id: m5
+    title: Signed build submitted for review
+    status: blocked
+
+next_action:
+  title: Generate the upload key locally and set the four release secrets
+  due: 2026-07-31
+
+blocked_on_me:
+  - title: The upload signing key has to be generated on a machine you control
+    decision: Run the generator locally now, or defer the submission
+    since: 2026-07-27
+
+risks:
+  - title: Nothing ships until the upload key exists
+    severity: high
+    mitigation: One local run of the generator unblocks the whole submission.
+  - title: Losing the upload key means losing the ability to ship updates at all
+    severity: high
+    mitigation: Back it up to a password manager the moment it is created, before anything else.
+
+log:
+  - date: 2026-07-27
+    note: Imported sessions now stay editable for 72 hours, then settle.
+  - date: 2026-07-27
+    note: Release-readiness pass — licensed typeface, real signing config, no destructive migrations.
+  - date: 2026-07-27
+    note: Privacy policy published for the store listing.
+  - date: 2026-07-26
+    note: Whole-app review fixes; health sync no longer gates the app on unsupported devices.

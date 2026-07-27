@@ -1,0 +1,49 @@
+id: stillpoint
+codename: Stillpoint
+summary: Voice-guided practice companion for Android. Runs entirely offline — no accounts, no ads, no telemetry.
+status: green
+stage: build
+started: 2026-07-19
+updated: 2026-07-27
+
+plan:
+  - id: m1
+    title: Practice engine — cue scripts, offline voice, real session records
+    status: done
+  - id: m2
+    title: Favourites, meditation timer, sequence builder
+    status: done
+  - id: m3
+    title: Personalisation and safety — private intake, contraindication flags
+    status: in_progress
+  - id: m4
+    title: Rendered voice packs per accent
+    status: in_progress
+  - id: m5
+    title: Release checklist cleared
+    status: todo
+
+next_action:
+  title: Audition the rendered candidates and settle the remaining accent
+  due: 2026-07-30
+
+blocked_on_me:
+  - title: Rendered voice candidates are sitting waiting to be listened to
+    decision: Which voice ships for the remaining accent
+    since: 2026-07-27
+
+risks:
+  - title: Generated pose imagery still needs a human accuracy pass
+    severity: high
+    mitigation: People copy these positions with their bodies. Check joint angles before any release.
+  - title: Commercial-use terms for the generated assets are unconfirmed
+    severity: medium
+    mitigation: Confirm against the generating tool's terms before any public or paid listing.
+
+log:
+  - date: 2026-07-27
+    note: Voice register retuned away from whispering; second accent chosen by audition.
+  - date: 2026-07-27
+    note: Release 0.10.0 — selectable accents, softer delivery.
+  - date: 2026-07-19
+    note: Started as the calm counterpart to the training app, on the same offline foundation.

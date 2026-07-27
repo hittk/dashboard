@@ -1,0 +1,67 @@
+id: masthead
+codename: Masthead
+summary: Independent publication working from the public record. Site, archive and newsletter all run out of one repository.
+status: green
+stage: build
+started: 2026-07-25
+target: 2026-08-22
+updated: 2026-07-27
+
+plan:
+  - id: m1
+    title: Publishing pipeline — a push puts a piece live
+    status: done
+    due: 2026-08-01
+  - id: m2
+    title: Launch slate of six pieces
+    status: done
+    due: 2026-08-15
+    note: Nine published against a target of six.
+  - id: m3
+    title: Site furniture — archive, topic pages, feed, about
+    status: done
+    due: 2026-08-15
+  - id: m4
+    title: Newsletter capture and welcome mail
+    status: todo
+    due: 2026-08-22
+  - id: m5
+    title: Search indexing and launch announcement
+    status: todo
+    due: 2026-08-22
+  - id: m6
+    title: Twice-weekly cadence held for a month
+    status: todo
+    due: 2026-09-30
+
+next_action:
+  title: Clear the two pieces in review, then close out the newsletter and indexing gates
+  due: 2026-07-29
+
+blocked_on_me:
+  - title: Two finished pieces are waiting on editorial approval
+    decision: Approve and publish, send notes back, or spike
+    since: 2026-07-27
+  - title: Twenty-two open pitches, three of them commissioned
+    decision: Which to commission next, and which to close unread
+    since: 2026-07-27
+
+risks:
+  - title: Two of the four launch gates depend on steps outside the repository
+    severity: medium
+    mitigation: Confirm the newsletter and indexing gates well before the target date, not on it.
+  - title: Output ran far ahead of plan in week one
+    severity: medium
+    mitigation: Bank one finished piece so a slow week does not break the run.
+
+log:
+  - date: 2026-07-27
+    note: Charts now generated from checked-in figures rather than drawn; two pieces in review.
+  - date: 2026-07-27
+    note: Editorial review console moved to a private handset app.
+  - date: 2026-07-27
+    note: Topic pages, feed and an about page live; front-page dead links down to zero.
+  - date: 2026-07-26
+    note: Launch slate exceeded — nine pieces published against a target of six.
+  - date: 2026-07-25
+    note: Plan agreed — four-week MVP, six-month horizon.

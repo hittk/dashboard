@@ -1,0 +1,46 @@
+id: curator
+codename: Curator
+summary: Self-hosted service that identifies incoming media files and files them into a library — and asks rather than guesses when it is unsure.
+status: green
+stage: review
+started: 2026-07-13
+updated: 2026-07-26
+
+plan:
+  - id: m1
+    title: Safety model — link, verify, retire; never delete while processing
+    status: done
+  - id: m2
+    title: Identification scored against a corpus of real filenames
+    status: done
+  - id: m3
+    title: Approval queue and dashboard
+    status: done
+  - id: m4
+    title: Accuracy pass — corroborate matches, take a second opinion
+    status: done
+  - id: m5
+    title: Run clean through a month of real arrivals
+    status: in_progress
+
+next_action:
+  title: Watch the next batch of arrivals and fold any misses back into the test corpus
+  due: 2026-08-13
+
+risks:
+  - title: A confident wrong answer is worse than no answer
+    severity: high
+    mitigation: Disagreement between sources vetoes the match and parks it for a human decision.
+  - title: Trash retention is the only recovery net once originals are retired
+    severity: medium
+    mitigation: Retention is aged from retirement time, and unknown-age entries are kept, never guessed.
+
+log:
+  - date: 2026-07-26
+    note: Accuracy pass — corroborate a match and take a second opinion before filing it.
+  - date: 2026-07-24
+    note: Fixed a retention bug that could reap originals early, and a nested-folder misfiling.
+  - date: 2026-07-15
+    note: Trash controls added to the dashboard, behind explicit confirmation.
+  - date: 2026-07-13
+    note: Restarted from scratch after the previous version deleted files it should not have.
