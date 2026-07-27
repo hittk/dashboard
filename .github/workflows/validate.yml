@@ -1,0 +1,30 @@
+name: Validate
+
+# Same two gates as the deploy workflow, run everywhere else — so a bad project file
+# or a privacy slip is caught on the branch, not after it reaches the live site.
+on:
+  push:
+    branches-ignore: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install "pyyaml==6.*"
+
+      - name: Privacy gate
+        run: python3 scripts/privacy_check.py
+
+      - name: Validate project files
+        run: python3 scripts/build.py --check

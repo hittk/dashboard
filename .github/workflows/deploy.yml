@@ -1,0 +1,55 @@
+name: Deploy dashboard
+
+on:
+  push:
+    branches: [main]
+  # Dates on the dashboard ("9 days late", "stale 3 weeks") are computed at build time,
+  # so a daily rebuild keeps them honest without anyone touching the repo.
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install "pyyaml==6.*"
+
+      # Runs FIRST and independently: if anything private is in the project files,
+      # the job fails here and no artifact is ever produced, let alone published.
+      - name: Privacy gate
+        run: python3 scripts/privacy_check.py
+
+      - name: Validate and build
+        run: python3 scripts/build.py
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
