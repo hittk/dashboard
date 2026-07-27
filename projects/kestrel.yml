@@ -1,0 +1,68 @@
+id: kestrel
+codename: Kestrel
+summary: Self-hosted analysis service that proposes decisions and enforces hard limits in code. Nothing acts without approval, and the unsimulated path stays locked until the record justifies it.
+status: green
+stage: review
+started: 2026-06-01
+target: 2026-09-22
+updated: 2026-07-27
+
+plan:
+  - id: m1
+    title: Data integrity and input hardening
+    status: done
+  - id: m2
+    title: Historical replay and an outcome ledger
+    status: done
+  - id: m3
+    title: Execution path, simulated only
+    status: done
+  - id: m4
+    title: Graduated autonomy gates, computed from the record
+    status: done
+  - id: m5
+    title: Authentication and perimeter
+    status: done
+  - id: m6
+    title: Encrypted transport end to end
+    status: done
+  - id: m7
+    title: Eight-week simulated track record
+    status: todo
+    due: 2026-09-22
+    note: The gates need eight weeks and twenty closed positions before they open.
+
+next_action:
+  title: Merge the working branch, then start the simulated run the gates measure
+  due: 2026-08-03
+
+blocked_on_me:
+  - title: Six phases of work sit on a branch that was never merged
+    decision: Merge it, or deliberately keep it isolated until there is a record
+    since: 2026-07-27
+  - title: The record the gates require cannot start accumulating until the run is switched on
+    decision: Start the simulated run now, or keep building first
+    since: 2026-07-27
+
+risks:
+  - title: The build is finished; the evidence behind it is not
+    severity: high
+    mitigation: Eight weeks and twenty closed positions are the floor. Do not shorten them because the code looks done.
+  - title: Tuning was done on one window with no true out-of-sample period
+    severity: high
+    mitigation: Treat the simulated run as the actual out-of-sample test, not a formality before switching over.
+  - title: Nothing has been merged, so the default branch does not reflect the project
+    severity: medium
+    mitigation: Merge, or write down why not — an unmerged branch is a single point of loss.
+
+log:
+  - date: 2026-07-27
+    note: Review pass over the new transport work closed three holes it had introduced.
+  - date: 2026-07-27
+    note: Encrypted transport enforced; the service now refuses to serve anything in the clear.
+  - date: 2026-07-27
+    note: Authentication and second factor added ahead of the perimeter work.
+  - date: 2026-07-26
+    note: Roadmap complete — autonomy gates now computed from the record rather than judgement.
+  - date: 2026-07-26
+    note: Retuned over a ten-year window; risk metric swapped for one that is stable across horizons.
