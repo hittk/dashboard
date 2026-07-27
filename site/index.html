@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" data-theme="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects dashboard</title>
+<meta name="description" content="Status across projects in flight, and what's waiting on me.">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='13' font-size='14'>📋</text></svg>">
+</head>
+<body>
+
+<a class="skip" href="#queue">Skip to action queue</a>
+
+<header class="page-head">
+  <div class="page-head__row">
+    <div>
+      <h1>Projects</h1>
+      <p class="page-head__sub" id="subtitle">Loading…</p>
+    </div>
+    <!-- Inline SVG rather than a glyph: ◐ / ☾ are missing from plenty of system fonts
+         and fall back to tofu. CSS picks the icon from the data-theme stamp. -->
+    <button type="button" id="theme-toggle" class="theme-toggle"
+            aria-label="Switch colour theme">
+      <svg class="ti ti--auto" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/>
+      </svg>
+      <svg class="ti ti--light" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle cx="12" cy="12" r="4.5" fill="currentColor"/>
+        <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M19.1 4.9l-1.8 1.8M6.7 17.3l-1.8 1.8"/>
+        </g>
+      </svg>
+      <svg class="ti ti--dark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M20.5 14.8A9 9 0 0 1 9.2 3.5a9 9 0 1 0 11.3 11.3z" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Portfolio strip: four stat tiles, each jumping to the section it counts. -->
+  <nav class="tiles" id="tiles" aria-label="Portfolio summary"></nav>
+</header>
+
+<main>
+  <section id="queue" class="queue" aria-labelledby="queue-h">
+    <h2 id="queue-h">Your action queue</h2>
+    <p class="section-note">Everything below is waiting on a decision or a next step from
+      you. Oldest first.</p>
+
+    <section id="blocked" aria-labelledby="blocked-h" class="queue__block">
+      <h3 id="blocked-h"><span class="dot dot--critical" aria-hidden="true"></span>Blocked on me</h3>
+      <div class="items" data-list="blocked"></div>
+    </section>
+
+    <section id="next" aria-labelledby="next-h" class="queue__block">
+      <h3 id="next-h"><span class="dot dot--accent" aria-hidden="true"></span>Next action, per project</h3>
+      <div class="items" data-list="next"></div>
+    </section>
+
+    <section id="risks" aria-labelledby="risks-h" class="queue__block">
+      <h3 id="risks-h"><span class="dot dot--serious" aria-hidden="true"></span>Risks &amp; slipping</h3>
+      <div class="items" data-list="risks"></div>
+    </section>
+
+    <section id="waiting" aria-labelledby="waiting-h" class="queue__block">
+      <h3 id="waiting-h"><span class="dot dot--warning" aria-hidden="true"></span>Waiting on others</h3>
+      <div class="items" data-list="waiting"></div>
+    </section>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-h">
+    <div class="section-head">
+      <h2 id="projects-h">Projects</h2>
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button type="button" class="filter" data-filter="attention" aria-pressed="false">Needs attention</button>
+        <button type="button" class="filter" data-filter="active" aria-pressed="false">Active</button>
+        <button type="button" class="filter is-on" data-filter="all" aria-pressed="true">All</button>
+      </div>
+    </div>
+    <div id="cards" class="cards"></div>
+  </section>
+</main>
+
+<footer class="page-foot">
+  <p><strong>Sanitised public view.</strong> Codenames, milestones and dates only — no
+    client detail, code or credentials. See
+    <a href="https://github.com/hittk/dashboard/blob/main/PRIVACY.md">the privacy rules</a>.</p>
+  <p id="built" class="muted"></p>
+</footer>
+
+<noscript>
+  <p class="notice">This dashboard renders from <a href="data.json">data.json</a> in the
+    browser, so it needs JavaScript. The underlying project files are readable in the
+    repo.</p>
+</noscript>
+
+<template id="tpl-card">
+  <details class="card" data-card>
+    <summary class="card__head">
+      <span class="card__title">
+        <span class="card__name" data-name></span>
+        <span class="pill" data-status></span>
+      </span>
+      <span class="card__summary" data-summary></span>
+      <span class="card__meta" data-meta></span>
+      <span class="meter" data-meter>
+        <span class="meter__track"><span class="meter__fill" data-fill></span></span>
+        <span class="meter__label" data-adherence></span>
+      </span>
+      <span class="card__flags" data-flags></span>
+      <span class="card__more" aria-hidden="true">Plan &amp; detail</span>
+    </summary>
+    <div class="card__body" data-body></div>
+  </details>
+</template>
+
+<script src="app.js"></script>
+</body>
+</html>
