@@ -1,0 +1,68 @@
+# EXAMPLE PROJECT — fictional. Delete this file once you've added your own.
+id: atlas
+codename: Atlas
+summary: Rebuild the reporting pipeline so numbers are produced once and reused everywhere.
+status: amber
+stage: build
+started: 2026-05-12
+target: 2026-09-30
+updated: 2026-07-26
+
+plan:
+  - id: m1
+    title: Map current reporting surfaces
+    status: done
+    due: 2026-05-30
+  - id: m2
+    title: Agree the shared data contract
+    status: done
+    due: 2026-06-20
+  - id: m3
+    title: Build the ingestion layer
+    status: in_progress
+    due: 2026-07-18
+    note: Running behind — scope grew after the contract review.
+  - id: m4
+    title: Migrate the first two consumers
+    status: blocked
+    due: 2026-08-22
+  - id: m5
+    title: Retire the legacy exports
+    status: todo
+    due: 2026-09-19
+
+next_action:
+  title: Cut m3 scope to the two consumers m4 needs, and reforecast
+  due: 2026-07-29
+
+blocked_on_me:
+  - title: Ingestion layer is waiting on a storage decision
+    decision: Managed service and pay for it, or self-host and own the maintenance
+    since: 2026-07-09
+  - title: Sign off the revised m4 acceptance criteria
+    decision: Whether partial migration counts as done for the milestone
+    since: 2026-07-22
+
+waiting_on:
+  - title: Access to the downstream staging environment
+    who: external — platform team
+    since: 2026-07-15
+    chase_after: 2026-07-25
+
+risks:
+  - title: m3 slippage pushes the whole chain past the September target
+    severity: high
+    mitigation: Cut m3 to the minimum m4 depends on; move the rest behind m5.
+  - title: Legacy exports may have undocumented consumers
+    severity: medium
+    mitigation: Log access for two weeks before retiring anything.
+
+log:
+  - date: 2026-07-26
+    note: Reforecast started; m3 scope cut proposed.
+  - date: 2026-07-18
+    note: m3 missed its due date — ingestion more involved than estimated.
+  - date: 2026-06-20
+    note: Data contract agreed and m2 closed.
+  - date: 2026-05-30
+    note: Reporting surfaces mapped; eleven found, four unowned.
