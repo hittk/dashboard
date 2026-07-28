@@ -15,17 +15,19 @@ add real projects.
 
 ## First-time setup
 
-Three steps, about three minutes, all in the repo's **Settings**:
+Two steps in the repo's **Settings**, then it looks after itself:
 
-1. **Pages → Build and deployment → Source: _GitHub Actions_.**
-   Not "Deploy from a branch" — the workflow publishes the artifact directly.
+1. **General → Default branch: `main`.**
+   `deploy.yml` publishes on pushes to `main`, and GitHub runs scheduled workflows
+   only on the default branch. If the default is some other branch, both the deploy
+   and the daily rebuild are aimed at a branch that never publishes.
 2. **Code security → enable _Secret scanning_ and _Push protection_.**
    Free on public repos. Blocks recognised credentials at `git push`, before the
    privacy gate ever has to catch them.
-3. **Merge to `main`.** The deploy workflow runs and the site goes live.
 
-Then replace the examples: delete `projects/atlas.yml`, `projects/beacon.yml` and
-`projects/cinder.yml`, and copy `projects/_TEMPLATE.yml` once per real project.
+Pages needs no setup of its own: `configure-pages` runs with `enablement: true`, so
+the first deploy turns Pages on through the API instead of waiting for someone to
+set the source by hand.
 
 ## Adding or updating a project
 
@@ -105,5 +107,7 @@ log names the field. Reproduce locally with `make build`.
 **Site loads but says "Could not load data.json".** You're opening `index.html` from the
 filesystem. Use `make serve`.
 
-**Pages 404s after a green deploy.** Settings → Pages → Source isn't set to
-_GitHub Actions_ yet.
+**The `deploy` job fails in about a second with no log.** It was never given a runner,
+so nothing in the workflow ran — the `github-pages` environment refused the deployment
+rather than anything failing inside it. Check that `main` is the default branch and
+that the environment's deployment branch policy allows the branch you pushed.
