@@ -14,3 +14,13 @@ notes.local.md
 __pycache__/
 *.pyc
 .DS_Store
+
+# Android build output and machine-local SDK path.
+# gradle/wrapper/gradle-wrapper.jar is deliberately NOT ignored — without it
+# ./gradlew cannot bootstrap on a fresh clone.
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+*.apk
+*.aab
