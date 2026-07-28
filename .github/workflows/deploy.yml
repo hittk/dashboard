@@ -38,7 +38,12 @@ jobs:
       - name: Validate and build
         run: python3 scripts/build.py
 
+      # enablement turns Pages on via the API if it isn't already. Without it the
+      # first run of this workflow fails here with "Get Pages site failed" and
+      # publishes nothing, which is what happened — the setting had never been set.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - uses: actions/upload-pages-artifact@v3
         with:
