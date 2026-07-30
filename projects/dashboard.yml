@@ -2,9 +2,9 @@ id: dashboard
 codename: Dashboard
 summary: This page. A public, sanitised view of what is in flight across every project and what is waiting on me.
 status: green
-stage: review
+stage: shipped
 started: 2026-07-27
-updated: 2026-07-27
+updated: 2026-07-30
 
 plan:
   - id: m1
@@ -21,16 +21,10 @@ plan:
     status: done
   - id: m5
     title: Live, with real projects on it
-    status: in_progress
+    status: done
 
 next_action:
-  title: Switch on Pages and secret scanning, then merge to main
-  due: 2026-07-28
-
-blocked_on_me:
-  - title: Two repository settings have to be switched on before anything deploys
-    decision: Pages source to Actions, and secret scanning with push protection
-    since: 2026-07-27
+  title: Build and verify the Android shell, then decide whether to merge it
 
 risks:
   - title: A dashboard nobody updates becomes fiction within a fortnight
@@ -49,3 +43,7 @@ log:
     note: Built — schema, privacy gate, build script, page, workflows and docs.
   - date: 2026-07-27
     note: Seeded with six real projects; the fictional examples removed.
+  - date: 2026-07-30
+    note: Live. Pages was never enabled and the deploy environment allowed one branch only — both fixed. Daily rebuild verified working.
+  - date: 2026-07-30
+    note: Android shell added — a WebView around the published page. Written with no SDK available, so not yet compiled.
