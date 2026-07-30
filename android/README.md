@@ -18,9 +18,19 @@ cd android
 Needs the Android SDK (API 35) and JDK 17+. Open `android/` in Android Studio and
 it will resolve everything itself.
 
-**Not built or run yet.** It was written in an environment with no Android SDK, so
-it has never been compiled. XML resources are validated; the Kotlin and Gradle
-scripts are not. Expect to fix something on first build.
+Built and verified: `BUILD SUCCESSFUL`, a 3.4 MB debug APK, `minSdk 26` / `targetSdk 35`,
+requesting only `INTERNET` and `ACCESS_NETWORK_STATE`. Lint is clean — 0 errors, and the
+only remaining warnings are `GradleDependency` notices that newer library versions exist.
+
+Dependencies are pinned to the versions the build was verified against rather than the
+newest available. Recent AndroidX releases often require a higher `compileSdk`, so
+bumping them is a change to make deliberately and re-verify, not a lint box to tick.
+
+**Not yet run on a device.** There was no emulator available, so the WebView behaviour,
+the dark-mode path and the offline fallback are unconfirmed against a real screen.
+
+If you rename a resource folder, run `./gradlew clean` first — the incremental resource
+cache keeps the old path and fails with a misleading "resource not found".
 
 ## What it does
 
