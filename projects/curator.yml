@@ -4,7 +4,6 @@ summary: Self-hosted service that identifies incoming media files and files them
 status: green
 stage: review
 started: 2026-07-13
-target: 2026-08-26
 updated: 2026-07-26
 
 plan:
